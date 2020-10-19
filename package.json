@@ -1,0 +1,19 @@
+{
+  "name": "fasel",
+  "version": "1.0.0",
+  "description": "Load functions from a dir and mount them",
+  "main": "index.js",
+  "dependencies": {
+    "fastify": "^3.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  },
+  "scripts": {
+    "start": "node index.js 3000 functions",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js 3000 functions"
+  },
+  "author": "",
+  "license": "ISC"
+}
