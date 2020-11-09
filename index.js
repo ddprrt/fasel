@@ -37,7 +37,7 @@ function handler(request, response) {
       try {
         funcs[func] = require(path.resolve(`${folder}/${func}`));
       } catch (e) {
-        response.status(404).send({
+        return response.status(404).send({
           msg: "function not found",
         });
       }
