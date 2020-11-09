@@ -3,15 +3,12 @@ const fastify = require("fastify").default();
 const path = require("path");
 const args = process.argv.slice(2);
 
-const port = args[0];
-const folder = args[1];
-
+const port = args[0] || 3000;
+const folder = args[1] || "functions";
 const funcs = {};
 
 fastify.post("/:func", handler);
 fastify.get("/:func", handler);
-
-fastify.post("what", (req, res) => {});
 
 fastify.listen(port, "0.0.0.0", function (err) {
   if (err) {
@@ -35,10 +32,11 @@ function handler(request, response) {
     const { func } = request.params;
     if (!funcs[func]) {
       try {
-        funcs[func] = require(path.resolve(`${folder}/${func}`));
+        funcs[func] = require(path.resolve(`./${folder}/${func}.js`));
       } catch (e) {
         return response.status(404).send({
           msg: "function not found",
+          error: e,
         });
       }
     }
