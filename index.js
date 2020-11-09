@@ -1,16 +1,18 @@
 //@ts-check
 const fastify = require("fastify").default();
 const path = require("path");
+const fs = require("fs");
 const args = process.argv.slice(2);
 
-const port = args[0] || 3000;
-const folder = args[1] || "functions";
+const folder = args[0] || process.env["FUNC_DIR"] || "functions";
+const port = args[1] || process.env["FASEL_PORT"] || 3000;
 const funcs = {};
 
 fastify.post("/:func", handler);
 fastify.get("/:func", handler);
 
 fastify.listen(port, "0.0.0.0", function (err) {
+  console.log("Running");
   if (err) {
     console.log(err);
   }
@@ -32,7 +34,7 @@ function handler(request, response) {
     const { func } = request.params;
     if (!funcs[func]) {
       try {
-        funcs[func] = require(path.resolve(`./${folder}/${func}.js`));
+        funcs[func] = require(path.resolve(`${folder}/${func}.js`));
       } catch (e) {
         return response.status(404).send({
           msg: "function not found",
