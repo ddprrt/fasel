@@ -10,9 +10,9 @@
     "nodemon": "^2.0.5"
   },
   "scripts": {
-    "start": "node index.js 3000 functions",
+    "start": "node index.js functions 3000",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js 3000 functions"
+    "dev": "nodemon index.js functions 3000"
   },
   "author": "",
   "license": "ISC"
