@@ -25,7 +25,7 @@ fastify.listen(port, "0.0.0.0", function (err) {
  * @param {FastifyRequest} request
  * @param {FastifyReply} response
  */
-function handler(request, response) {
+async function handler(request, response) {
   if (
     typeof request.params === "object" &&
     typeof request.params.hasOwnProperty("func")
